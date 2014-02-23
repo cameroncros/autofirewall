@@ -1,0 +1,46 @@
+if [ -e output/newips ]
+then
+ rm output/newips
+fi
+
+time=$(cat /proc/uptime | cut -d "." -f 1)
+if [ $time -lt 300 ]
+then
+ if [ -e output/oldips ]
+  then  
+  rm output/oldips
+ fi
+fi
+
+touch output/oldips
+
+
+for i in `cat input/hostnames`;
+do
+	nslookup $i 8.8.8.8 2>/dev/null | grep Address | tail -n 1 | cut -d " " -f 2;
+done > output/newips
+
+cat output/newips
+
+echo "New IPs"
+
+newip=$(diff output/oldips output/newips | grep ">" | cut -d " " -f 2)
+
+for i in $newip;
+ do
+  /sbin/iptables -I INPUT 1 -p udp -s $i --dport 53 -j ACCEPT
+  echo $i
+done
+
+
+echo "Old IPs"
+
+oldip=$(diff output/newips output/oldips | grep ">" | cut -d " " -f 2)
+
+for i in $oldip;
+ do
+  /sbin/iptables -D INPUT -p udp -s $i --dport 53 -j ACCEPT
+  echo $1
+done
+
+cp output/newips output/oldips
