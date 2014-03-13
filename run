@@ -6,7 +6,7 @@ fi
 time=$(cat /proc/uptime | cut -d "." -f 1)
 if [ $time -lt 300 ]
 then
- iptables -A INPUT -p udp --dport 53 -j DROP
+ /sbin/iptables -A INPUT -p udp --dport 53 -j DROP
  if [ -e output/oldips ]
   then  
   rm output/oldips
