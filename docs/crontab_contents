@@ -1,1 +1,1 @@
-*/5 * * * * /root/run | wall
+*/5 * * * * /root/run
