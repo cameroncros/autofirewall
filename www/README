@@ -1,0 +1,8 @@
+These commands allow the script to write the hostnames file, modify them to suit your program
+
+sudo setsebool allow_httpd_anon_write 1
+sudo setsebool allow_httpd_sys_script_anon_write 1
+sudo chcon -R -t public_content_rw_t /var/www/html/output/
+sudo chcon -R -t public_content_rw_t /var/www/html/output
+sudo chcon -R -t public_content_rw_t /var/www/html/output/hostnames
+sudo chmod 777 /var/www/html/output/hostnames
