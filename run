@@ -16,7 +16,7 @@ fi
 touch output/oldips
 
 
-wget http://*.*.*.*/output/hostnames -O input/hostnames
+#wget http://*.*.*.*/output/hostnames -O input/hostnames
 
 
 
