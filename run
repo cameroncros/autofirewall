@@ -16,6 +16,10 @@ fi
 touch output/oldips
 
 
+wget http://*.*.*.*/output/hostnames -O input/hostnames
+
+
+
 for i in `cat input/hostnames`;
 do
 	nslookup $i 8.8.8.8 2>/dev/null | grep Address | tail -n 1 | cut -d " " -f 2;
