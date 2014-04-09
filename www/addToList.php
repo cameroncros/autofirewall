@@ -11,9 +11,9 @@ if (in_array($email, $users))
 		echo system( "grep -v \"$safeemail\" $hostnamefile > $tempfile");
 		echo system( "echo \"$address #$safeemail\" >> $tempfile" );
 		copy($tempfile, $hostnamefile);
-		echo "Success, GO WATCH NETFLIX!";
+	include "success.html";
 } else {
-	echo "Invalid Email";
+	include "error.html";
 }
 
 ?>
